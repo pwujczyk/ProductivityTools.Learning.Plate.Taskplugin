@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-popover": "^1.0.7",
+    "@radix-ui/react-separator": "^1.0.3",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toolbar": "^1.0.4",
+    "@radix-ui/react-tooltip": "^1.0.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -10,18 +17,46 @@
     "@types/node": "^16.18.80",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
+    "@udecode/cn": "^29.0.1",
+    "@udecode/plate-alignment": "^30.4.5",
+    "@udecode/plate-basic-marks": "^30.4.5",
+    "@udecode/plate-block-quote": "^30.4.5",
+    "@udecode/plate-break": "^30.4.5",
+    "@udecode/plate-combobox": "^30.4.5",
+    "@udecode/plate-common": "^30.4.5",
+    "@udecode/plate-dnd": "^30.4.5",
+    "@udecode/plate-emoji": "^30.4.5",
+    "@udecode/plate-floating": "^30.4.5",
+    "@udecode/plate-heading": "^30.4.5",
+    "@udecode/plate-indent": "^30.4.5",
+    "@udecode/plate-indent-list": "^30.4.5",
+    "@udecode/plate-line-height": "^30.4.5",
+    "@udecode/plate-link": "^30.4.5",
+    "@udecode/plate-node-id": "^30.4.5",
+    "@udecode/plate-paragraph": "^30.4.5",
+    "@udecode/plate-reset-node": "^30.4.5",
+    "class-variance-authority": "^0.7.0",
+    "lucide-react": "^0.330.0",
     "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "slate": "^0.102.0",
+    "slate-history": "^0.100.0",
+    "slate-hyperscript": "^0.100.0",
+    "slate-react": "^0.102.0",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
+ },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -39,5 +74,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
   }
 }
