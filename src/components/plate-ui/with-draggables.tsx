@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { ELEMENT_CODE_BLOCK } from '@udecode/plate-code-block';
 import { createNodesWithHOC } from '@udecode/plate-common';
 import {
   WithDraggableOptions,
@@ -95,13 +94,6 @@ export const withDraggables = (components: any) => {
         },
       },
     },
-    {
-      key: ELEMENT_CODE_BLOCK,
-      draggableProps: {
-        classNames: {
-          gutterLeft: 'pt-8 px-0 pb-0',
-        },
-      },
-    },
+    
   ]);
 };
