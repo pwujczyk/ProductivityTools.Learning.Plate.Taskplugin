@@ -1,5 +1,5 @@
 'use client';
-
+import { useState } from 'react';
 import { withProps } from '@udecode/cn';
 import { createPlugins, Plate, RenderAfterEditable, PlateLeaf } from '@udecode/plate-common';
 import { createParagraphPlugin, ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
@@ -33,117 +33,129 @@ import { withDraggables } from '@/components/plate-ui/with-draggables';
 import { TooltipProvider } from '@/components/plate-ui/tooltip';
 
 const plugins = createPlugins(
-  [
-    createParagraphPlugin(),
-    createLinkPlugin({
-      renderAfterEditable: LinkFloatingToolbar as RenderAfterEditable,
-    }),
-    createCaptionPlugin({
-      options: {
-        pluginKeys: [
-          // ELEMENT_IMAGE, ELEMENT_MEDIA_EMBED
-        ]
-      },
-    }),
-    createTodoListPlugin(),
-    createBoldPlugin(),
-    createAlignPlugin({
-      inject: {
-        props: {
-          validTypes: [
-            ELEMENT_PARAGRAPH,
-            // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3
-          ],
-        },
-      },
-    }),
-    createIndentPlugin({
-      inject: {
-        props: {
-          validTypes: [
-            ELEMENT_PARAGRAPH,
-            // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_BLOCKQUOTE, ELEMENT_CODE_BLOCK
-          ],
-        },
-      },
-    }),
-    createIndentListPlugin({
-      inject: {
-        props: {
-          validTypes: [
-            ELEMENT_PARAGRAPH,
-            // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_BLOCKQUOTE, ELEMENT_CODE_BLOCK
-          ],
-        },
-      },
-    }),
-    createLineHeightPlugin({
-      inject: {
-        props: {
-          defaultNodeValue: 1.5,
-          validNodeValues: [1, 1.2, 1.5, 2, 3],
-          validTypes: [
-            ELEMENT_PARAGRAPH,
-            // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3
-          ],
-        },
-      },
-    }),
-    createAutoformatPlugin({
-      options: {
-        rules: [
-          // Usage: https://platejs.org/docs/autoformat
-        ],
-        enableUndoOnDelete: true,
-      },
-    }),
-    createBlockSelectionPlugin({
-      options: {
-        sizes: {
-          top: 0,
-          bottom: 0,
-        },
-      },
-    }),
-    createComboboxPlugin(),
-    createDndPlugin({
-        options: { enableScroller: true },
-    })
-  ],
-  {
-    components: withDraggables(withPlaceholders({
-      [ELEMENT_LINK]: LinkElement,
-      [ELEMENT_PARAGRAPH]: ParagraphElement,
-      [ELEMENT_TODO_LI]: TodoListElement,
-      [MARK_BOLD]: withProps(PlateLeaf, { as: 'strong' }),
-    })),
-  }
+    [
+        createParagraphPlugin(),
+        createLinkPlugin({
+            renderAfterEditable: LinkFloatingToolbar as RenderAfterEditable,
+        }),
+        createCaptionPlugin({
+            options: {
+                pluginKeys: [
+                    // ELEMENT_IMAGE, ELEMENT_MEDIA_EMBED
+                ]
+            },
+        }),
+        createTodoListPlugin(),
+        createBoldPlugin(),
+        createAlignPlugin({
+            inject: {
+                props: {
+                    validTypes: [
+                        ELEMENT_PARAGRAPH,
+                        // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3
+                    ],
+                },
+            },
+        }),
+        createIndentPlugin({
+            inject: {
+                props: {
+                    validTypes: [
+                        ELEMENT_PARAGRAPH,
+                        // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_BLOCKQUOTE, ELEMENT_CODE_BLOCK
+                    ],
+                },
+            },
+        }),
+        createIndentListPlugin({
+            inject: {
+                props: {
+                    validTypes: [
+                        ELEMENT_PARAGRAPH,
+                        // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_BLOCKQUOTE, ELEMENT_CODE_BLOCK
+                    ],
+                },
+            },
+        }),
+        createLineHeightPlugin({
+            inject: {
+                props: {
+                    defaultNodeValue: 1.5,
+                    validNodeValues: [1, 1.2, 1.5, 2, 3],
+                    validTypes: [
+                        ELEMENT_PARAGRAPH,
+                        // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3
+                    ],
+                },
+            },
+        }),
+        createAutoformatPlugin({
+            options: {
+                rules: [
+                    // Usage: https://platejs.org/docs/autoformat
+                ],
+                enableUndoOnDelete: true,
+            },
+        }),
+        createBlockSelectionPlugin({
+            options: {
+                sizes: {
+                    top: 0,
+                    bottom: 0,
+                },
+            },
+        }),
+        createComboboxPlugin(),
+        createDndPlugin({
+            options: { enableScroller: true },
+        })
+    ],
+    {
+        components: withDraggables(withPlaceholders({
+            [ELEMENT_LINK]: LinkElement,
+            [ELEMENT_PARAGRAPH]: ParagraphElement,
+            [ELEMENT_TODO_LI]: TodoListElement,
+            [MARK_BOLD]: withProps(PlateLeaf, { as: 'strong' }),
+        })),
+    }
 );
 
 const initialValue = [
-  {
-    id: '1',
-    type: 'p',
-    children: [{ text: 'Hello, World!' }],
-  },
+    {
+        id: '1',
+        type: 'p',
+        children: [{ text: 'Hello, World!' }],
+    },
 ];
 
 export function PlateEditor() {
-  return (
-    <TooltipProvider>
-      <DndProvider backend={HTML5Backend}>
-        <Plate plugins={plugins} initialValue={initialValue}>
-          <FixedToolbar>
-            <FixedToolbarButtons />
-          </FixedToolbar>
-          
-          <Editor />
-          
-          <FloatingToolbar>
-            <FloatingToolbarButtons />
-          </FloatingToolbar>
-        </Plate>
-      </DndProvider>
-    </TooltipProvider>
-  );
+
+    const [value, setValue] = useState<any>(initialValue);
+
+    const change = (e: any) => {
+        setValue(e);
+
+    }
+
+    return (
+        <div>
+            <div>pawel</div>
+            <TooltipProvider>
+                <DndProvider backend={HTML5Backend}>
+                    <Plate plugins={plugins} initialValue={initialValue} onChange={change}>
+                        <FixedToolbar>
+                            <FixedToolbarButtons />
+                        </FixedToolbar>
+
+                        <Editor />
+
+                        <FloatingToolbar>
+                            <FloatingToolbarButtons />
+                        </FloatingToolbar>
+                    </Plate>
+                </DndProvider>
+            </TooltipProvider>
+            <div>content:{JSON.stringify(value)}</div>
+        </div>
+    );
 }
