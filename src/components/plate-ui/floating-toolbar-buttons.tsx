@@ -23,9 +23,9 @@ export function FloatingToolbarButtons() {
         <>
           <TurnIntoDropdownMenu />
 
-          <MarkToolbarButton nodeType={MARK_BOLD} tooltip="Bold (⌘+B)">
+          {/* <MarkToolbarButton nodeType={MARK_BOLD} tooltip="Bold (⌘+B)">
             <Icons.bold />
-          </MarkToolbarButton>
+          </MarkToolbarButton> */}
           <MarkToolbarButton nodeType={MARK_ITALIC} tooltip="Italic (⌘+I)">
             <Icons.italic />
           </MarkToolbarButton>
