@@ -8,6 +8,7 @@ export const LinkElement = withRef<typeof PlateElement>(
     const element = useElement<TLinkElement>();
     const { props: linkProps } = useLink({ element });
 
+    console.log("link props in link:", linkProps)
     return (
       <PlateElement
         ref={ref}

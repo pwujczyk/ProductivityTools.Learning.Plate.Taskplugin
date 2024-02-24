@@ -17,23 +17,22 @@ export const TodoListElement = withRef<typeof PlateElement>(
     const state = useTodoListElementState({ element });
     const { checkboxProps } = useTodoListElement(state);
 
-   
-    const { props: linkProps } = useLink({ element });
 
-//{"type":"a","url":"https://github.com/udecode/plate/discussions/1344","children":[{"text":"World"}]},
+    let { props: linkProps } = useLink({ element });
+    linkProps = { ...linkProps, target: undefined }
+
+    //{"type":"a","url":"https://github.com/udecode/plate/discussions/1344","children":[{"text":"World"}]},
     const editor = useEditorRef();
     const path = findNodePath(editor, element);
     setNodes(
       editor,
-      { url: '{"type":"a"}' },
+      { url: 'http://prodictivitytools/' },
       {
         at: path,
       }
     );
 
-    console.log(props);
-    console.log(state);
-    console.log("XXXX")
+    console.log("Linkprops in task", linkProps)
     return (
       <div>
         <PlateElement
@@ -47,6 +46,7 @@ export const TodoListElement = withRef<typeof PlateElement>(
           >
             <Checkbox {...checkboxProps} />
           </div>
+          <span>{element.url}</span>
           <span
             className={cn(
               'flex-1 focus:outline-none',
@@ -58,7 +58,19 @@ export const TodoListElement = withRef<typeof PlateElement>(
             {children}
           </span>
         </PlateElement >
-      </div>  
+        <PlateElement
+          ref={ref}
+          asChild
+          className={cn(
+            'font-medium text-primary underline decoration-primary underline-offset-4',
+            className
+          )}
+          {...(linkProps as any)}
+          {...props}
+        >
+          <a>{children}</a>
+        </PlateElement>
+      </div>
     );
   }
 );
